@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+    <h2>Choose a song:</h2>
+    <form th:action="@{'/artist-form'}" th:method="POST">
+        <th:block th:each="song : ${songs}">
+            <input type="radio" name="song" th:value="${song.getTrackId()}">
+            <span>Title: <span th:text="${song.getTitle()}"></span></span>
+            <span>Genre: <span th:text="${song.getGenre()}"></span></span>
+            <span>Release Year: <span th:text="${song.getReleaseYear()}"></span></span>
+            <span>Album: <span th:text="${song.getAlbum().getName()}"></span></span>
+            <br/>
+        </th:block>
+        <input type='submit' value='Submit'>
+    </form>
+
+    <h2>Edit song list</h2>
+    <th:block th:each="song : ${songs}">
+        <span>Title: <span th:text="${song.getTitle()}"></span></span>
+        <span>Genre: <span th:text="${song.getGenre()}"></span></span>
+        <span>Release Year: <span th:text="${song.getReleaseYear()}"></span></span>
+        <span>Album: <span th:text="${song.getAlbum().getName()}"></span></span>
+
+        <form th:action="@{'/songs/edit-form/{id}' (id=${song.getId()})}" th:method="GET">
+            <button type="submit">Edit</button>
+        </form>
+
+        <form th:action="@{'/songs/delete/{id}' (id=${song.getId()})}" th:method="DELETE">
+            <button type="submit">Delete</button>
+        </form>
+    </th:block>
+
+    <form th:action="@{'songs/add-form'}" th:method="GET">
+        <button type="submit">Add New Song</button>
+    </form>
+
+</main>
+</body>
+</html>
