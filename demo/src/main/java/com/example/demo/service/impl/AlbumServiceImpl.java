@@ -1,13 +1,15 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.Album;
-import com.example.demo.repository.AlbumRepository;
+import com.example.demo.repository.jpa.AlbumRepository;
 import com.example.demo.service.AlbumService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class AlbumServiceImpl implements AlbumService {
+
     private final AlbumRepository albumRepository;
 
     public AlbumServiceImpl(AlbumRepository albumRepository) {
@@ -21,6 +23,6 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Album findById(Long id) {
-        return albumRepository.findById(id);
+        return albumRepository.findById(id).orElse(null);
     }
 }

@@ -15,11 +15,11 @@ import java.io.IOException;
 
 @WebServlet(name = "SongListServlet", urlPatterns = "/listSongs")
 class SongListServlet extends HttpServlet {
-    private final SongService song;
+    private final SongService songs;
     private final SpringTemplateEngine springTemplateEngine;
 
     public SongListServlet(SongService song, SpringTemplateEngine springTemplateEngine) {
-        this.song = song;
+        this.songs = song;
         this.springTemplateEngine = springTemplateEngine;
     }
     @Override
@@ -27,7 +27,7 @@ class SongListServlet extends HttpServlet {
         IWebExchange exchange = JakartaServletWebApplication.buildApplication(getServletContext()).buildExchange(req, resp);
 
         WebContext context = new WebContext(exchange);
-        context.setVariable("songs", song.listSongs());
+        context.setVariable("songs", songs.listSongs());
         springTemplateEngine.process("listSongs.html",context,resp.getWriter());
     }
     @Override

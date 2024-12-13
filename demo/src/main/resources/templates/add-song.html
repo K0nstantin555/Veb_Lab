@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    span{
+        margin: 5px;
+    }
+</style>
 <body>
 <h2 th:text="${songId==null}? 'Add new ' : 'Edit '" >song</h2>
 <section th:if="${songId != null}">
-    <span>Title: <span th:text="${song.getTitle()}"></span></span>
-    <span>Genre: <span th:text="${song.getGenre()}"></span></span>
-    <span>Release Year: <span th:text="${song.getReleaseYear()}"></span></span>
-    <span>Album: <span th:text="${song.getAlbum().getName()}"></span></span>
+    <span>Title: <span th:text="${song.getTitle()}"></span>     </span>
+    <span>Genre: <span th:text="${song.getGenre()}">    </span></span>
+    <span>Release Year: <span th:text="${song.getReleaseYear()}"></span>    </span>
+    <span>Album: <span th:text="${song.getAlbum().getName()}"></span>   </span>
 </section>
 
 <form th:action="(${songId==null}? '/songs/add' : '/songs/edit/'+${songId}+'?')" method="POST">
-    <label>Title: <input type="text" name="songTitle"></label>
-    <label>TrackId: <input type="text" name="trackId"></label>
-    <label>Genre: <input type="text" name="genre"></label>
-    <label>Release year: <input type="text" name="releaseYear"></label>
+    <label>Title: <input type="text" name="songTitle">      </label>
+    <label>TrackId: <input type="text" name="trackId">      </label>
+    <label>Genre: <input type="text" name="genre">      </label>
+    <label>Release year: <input type="text" name="releaseYear">     </label>
     <label>Album:
         <select id="albumId" name="albumId" >
             <option th:each="album : ${albums}" th:value="${album.getId()}" th:text="${album.getName()}"></option>

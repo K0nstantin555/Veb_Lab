@@ -5,14 +5,15 @@ import com.example.demo.model.Artist;
 import com.example.demo.model.Song;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SongService {
     List<Song> listSongs();
     void addArtistToSong(Artist artist, Song song);
-    public Song findByTrackid(String trackId);
-    
-    void addNewSong(String songTitle, String trackId, String genre, int releaseYear, Album album);
-    void deleteSong(Long id);
-    Song findSongById(Long id);
-    void editSong(Long id, String songTitle, String trackId, String genre, int releaseYear, Album album);
+    Song findByTrackId(String trackId);
+    Song findBySongId(Long id);
+    void deleteSongById(Long id);
+    void addNewSong(String songTitle, String trackId, String genre, int i, Album byId);
+
+    void editSong(Long songId, String songTitle, String trackId, String genre, int i, Album byId);
 }
